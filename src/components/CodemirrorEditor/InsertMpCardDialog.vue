@@ -23,7 +23,7 @@ const config = useStorage<Config>(addPrefix(`mp-profile`), {
   name: ``,
   logo: ``,
   desc: ``,
-},utools.dbStorage)
+}, utools.dbStorage)
 
 /**
  * @deprecated 更换为对象形式，后续版本可移除该兼容写法

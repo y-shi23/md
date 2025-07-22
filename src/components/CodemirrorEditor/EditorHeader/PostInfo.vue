@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
 import { useStore } from '@/stores'
 import { processClipboardContent } from '@/utils'
-import { storeToRefs } from 'pinia'
 
 const store = useStore()
 const { primaryColor, isDark } = storeToRefs(store)
