@@ -30,20 +30,24 @@ body {
   pointer-events: initial !important;
 }
 
+/* 隐藏所有滚动条但保持滚动功能 */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: #ffffff;
+  width: 0px;
+  height: 0px;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-track {
-  border-radius: 6px;
-  background-color: rgba(200, 200, 200, 0.3);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 6px;
-  background-color: rgba(144, 146, 152, 0.5);
+  background: transparent;
+}
+
+/* 对于Firefox */
+* {
+  scrollbar-width: none;
 }
 
 /* CSS-hints */

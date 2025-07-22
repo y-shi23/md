@@ -440,23 +440,23 @@ defineExpose({ visible, runAIAction, replaceText, show, close, stopAI })
   --tw-scale-y: 1;
 }
 
+/* 隐藏滚动条但保持滚动功能 */
 .custom-scroll::-webkit-scrollbar {
-  width: 6px;
+  width: 0px;
+  height: 0px;
+  background: transparent;
 }
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 .custom-scroll::-webkit-scrollbar-thumb {
-  /* Tailwind @apply in <style> needs explicit classes when using <style scoped> */
-  background-color: rgba(156, 163, 175, 0.4);
-  border-radius: 9999px;
+  background: transparent;
 }
-.custom-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(156, 163, 175, 0.6);
-}
+
 .custom-scroll {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(156, 163, 175, 0.4) transparent;
-}
-:deep(.dark) .custom-scroll {
-  scrollbar-color: rgba(107, 114, 128, 0.4) transparent;
+  scrollbar-width: none;
 }
 
 .popover-header {
@@ -466,7 +466,8 @@ defineExpose({ visible, runAIAction, replaceText, show, close, stopAI })
 
 @media (pointer: coarse) {
   .custom-scroll::-webkit-scrollbar {
-    width: 3px;
+    width: 0px;
+    height: 0px;
   }
 }
 </style>

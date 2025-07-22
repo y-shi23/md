@@ -606,24 +606,29 @@ async function sendMessage() {
   overflow-x: auto; /* 横向滚动 */
 }
 
-/* 自定义滚动条 */
+/* 隐藏滚动条但保持滚动功能 */
+.custom-scroll::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.custom-scroll {
+  scrollbar-width: none;
+}
+
 @media (pointer: coarse) {
   .custom-scroll::-webkit-scrollbar {
-    width: 3px;
+    width: 0px;
+    height: 0px;
   }
-}
-.custom-scroll::-webkit-scrollbar {
-  width: 6px;
-}
-.custom-scroll::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-gray-400/40 hover:bg-gray-400/60;
-  @apply dark:bg-gray-500/40 dark:hover:bg-gray-500/70;
-}
-.custom-scroll {
-  scrollbar-width: thin;
-  scrollbar-color: rgb(156 163 175 / 0.4) transparent;
-}
-.dark .custom-scroll {
-  scrollbar-color: rgb(107 114 128 / 0.4) transparent;
 }
 </style>
