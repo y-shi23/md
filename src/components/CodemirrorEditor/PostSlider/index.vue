@@ -110,7 +110,7 @@ function recoverHistory() {
 }
 
 /* ============ 排序 ============ */
-const sortMode = useStorage(addPrefix(`sort_mode`), `create-old-new`)
+const sortMode = useStorage(addPrefix(`sort_mode`), `create-old-new`, utools.dbStorage)
 const sortedPosts = computed(() => {
   return [...store.posts].sort((a, b) => {
     switch (sortMode.value) {
@@ -130,6 +130,20 @@ const sortedPosts = computed(() => {
     }
   })
 })
+
+/* ============ 展开/收起状态管理 ============ */
+const areAllPostsCollapsed = computed(() => {
+  return store.posts.length > 0 && store.posts.every(post => post.collapsed === true)
+})
+
+function toggleAllPosts() {
+  if (areAllPostsCollapsed.value) {
+    store.expandAllPosts()
+  }
+  else {
+    store.collapseAllPosts()
+  }
+}
 
 /* ============ 拖拽功能 ============ */
 const dragover = ref(false)
@@ -278,25 +292,13 @@ function handleDragEnd() {
         <TooltipProvider :delay-duration="200">
           <Tooltip>
             <TooltipTrigger as-child>
-              <Button variant="ghost" size="xs" class="h-max p-1" @click="store.collapseAllPosts">
-                <ChevronsDownUp class="size-5" />
+              <Button variant="ghost" size="xs" class="h-max p-1" @click="toggleAllPosts">
+                <ChevronsDownUp v-if="!areAllPostsCollapsed" class="size-5" />
+                <ChevronsUpDown v-else class="size-5" />
               </Button>
             </TooltipTrigger>
             <TooltipContent side="bottom">
-              全部收起
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-
-        <TooltipProvider :delay-duration="200">
-          <Tooltip>
-            <TooltipTrigger as-child>
-              <Button variant="ghost" size="xs" class="h-max p-1" @click="store.expandAllPosts">
-                <ChevronsUpDown class="size-5" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="bottom">
-              全部展开
+              {{ areAllPostsCollapsed ? '全部展开' : '全部收起' }}
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>

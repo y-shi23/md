@@ -12,7 +12,7 @@ import { VitePluginRadar } from 'vite-plugin-radar'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 export default defineConfig({
-  base: process.env.SERVER_ENV === `NETLIFY` ? `/` : `/md/`,
+  base: `./`,
   define: { process },
   envPrefix: [`VITE_`, `CF_`],
   plugins: [

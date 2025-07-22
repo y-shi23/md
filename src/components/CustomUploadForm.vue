@@ -5,7 +5,7 @@ import { removeLeft } from '@/utils'
 
 const store = useStore()
 
-const code = useLocalStorage(`formCustomConfig`, removeLeft(`
+const code = useStorage(`formCustomConfig`, removeLeft(`
   const {file, util, okCb, errCb} = CUSTOM_ARG
   const param = new FormData()
   param.append('file', file)
@@ -16,7 +16,7 @@ const code = useLocalStorage(`formCustomConfig`, removeLeft(`
   }).catch(err => {
     errCb(err)
   })
-`).trim())
+`).trim(), utools.dbStorage)
 
 const formCustomTextarea = useTemplateRef<HTMLTextAreaElement>(`formCustomTextarea`)
 

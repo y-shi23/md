@@ -39,11 +39,11 @@ export const useQuickCommands = defineStore(`quickCommands`, () => {
     const toSave: QuickCommandPersisted[] = commands.value.map(
       ({ id, label, template }) => ({ id, label, template }),
     )
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave))
+    utools.dbStorage.setItem(STORAGE_KEY, JSON.stringify(toSave))
   }
 
   function load() {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = utools.dbStorage.getItem(STORAGE_KEY)
     if (raw) {
       try {
         const parsed: QuickCommandPersisted[] = JSON.parse(raw)

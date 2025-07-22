@@ -11,9 +11,9 @@ import {
 
 export default defineStore(`AIConfig`, () => {
   /* ————— 与 service 无关的全局配置 ————— */
-  const type = useStorage<string>(`openai_type`, DEFAULT_SERVICE_TYPE)
-  const temperature = useStorage<number>(`openai_temperature`, DEFAULT_SERVICE_TEMPERATURE)
-  const maxToken = useStorage<number>(`openai_max_token`, DEFAULT_SERVICE_MAX_TOKEN)
+  const type = useStorage<string>(`openai_type`, DEFAULT_SERVICE_TYPE, utools.dbStorage)
+  const temperature = useStorage<number>(`openai_temperature`, DEFAULT_SERVICE_TEMPERATURE, utools.dbStorage)
+  const maxToken = useStorage<number>(`openai_max_token`, DEFAULT_SERVICE_MAX_TOKEN, utools.dbStorage)
 
   /* ————— 与 service 强相关的字段 ————— */
   const endpoint = ref<string>(``) // 由 watch(type) 初始化
@@ -23,11 +23,11 @@ export default defineStore(`AIConfig`, () => {
   const apiKey = customRef<string>((track, trigger) => ({
     get() {
       track()
-      return localStorage.getItem(`openai_key_${type.value}`) || DEFAULT_SERVICE_KEY
+      return utools.dbStorage.getItem(`openai_key_${type.value}`) || DEFAULT_SERVICE_KEY
     },
     set(val: string) {
       if (type.value !== DEFAULT_SERVICE_TYPE) {
-        localStorage.setItem(`openai_key_${type.value}`, val)
+        utools.dbStorage.setItem(`openai_key_${type.value}`, val)
       }
       trigger()
     },
@@ -45,18 +45,18 @@ export default defineStore(`AIConfig`, () => {
       endpoint.value = svc.endpoint
 
       // 读取或回退模型
-      const saved = localStorage.getItem(`openai_model_${newType}`) || ``
+      const saved = utools.dbStorage.getItem(`openai_model_${newType}`) || ``
       model.value = svc.models.includes(saved) ? saved : svc.models[0]
 
       // 如有回退，写回存储保持一致
-      localStorage.setItem(`openai_model_${newType}`, model.value)
+      utools.dbStorage.setItem(`openai_model_${newType}`, model.value)
     },
     { immediate: true }, // ⬅️ 关键：首次也执行
   )
 
   // ② model 变化 → 持久化到对应 service 键
   watch(model, (val) => {
-    localStorage.setItem(`openai_model_${type.value}`, val)
+    utools.dbStorage.setItem(`openai_model_${type.value}`, val)
   })
 
   /* ————— actions ————— */
@@ -68,8 +68,8 @@ export default defineStore(`AIConfig`, () => {
 
     // 清理所有 service 相关持久化
     serviceOptions.forEach(({ value }) => {
-      localStorage.removeItem(`openai_key_${value}`)
-      localStorage.removeItem(`openai_model_${value}`)
+      utools.dbStorage.removeItem(`openai_key_${value}`)
+      utools.dbStorage.removeItem(`openai_model_${value}`)
     })
   }
 

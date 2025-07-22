@@ -156,10 +156,10 @@ function beforeUpload(file: File) {
   }
 
   // check image host
-  const imgHost = localStorage.getItem(`imgHost`) || `default`
-  localStorage.setItem(`imgHost`, imgHost)
+  const imgHost = utools.dbStorage.getItem(`imgHost`) || `default`
+  utools.dbStorage.setItem(`imgHost`, imgHost)
 
-  const config = localStorage.getItem(`${imgHost}Config`)
+  const config = utools.dbStorage.getItem(`${imgHost}Config`)
   const isValidHost = imgHost === `default` || config
   if (!isValidHost) {
     toast.error(`请先配置 ${imgHost} 图床参数`)

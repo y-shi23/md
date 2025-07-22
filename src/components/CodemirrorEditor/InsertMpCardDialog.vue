@@ -23,24 +23,24 @@ const config = useStorage<Config>(addPrefix(`mp-profile`), {
   name: ``,
   logo: ``,
   desc: ``,
-})
+},utools.dbStorage)
 
 /**
  * @deprecated 更换为对象形式，后续版本可移除该兼容写法
  */
-const mpId = useStorage(`mpId`, ``)
+const mpId = useStorage(`mpId`, ``, utools.dbStorage)
 /**
  * @deprecated 更换为对象形式，后续版本可移除该兼容写法
  */
-const mpName = useStorage(`mpName`, ``)
+const mpName = useStorage(`mpName`, ``, utools.dbStorage)
 /**
  * @deprecated 更换为对象形式，后续版本可移除该兼容写法
  */
-const mpLogo = useStorage(`mpLogo`, ``)
+const mpLogo = useStorage(`mpLogo`, ``, utools.dbStorage)
 /**
  * @deprecated 更换为对象形式，后续版本可移除该兼容写法
  */
-const mpDesc = useStorage(`mpDesc`, ``)
+const mpDesc = useStorage(`mpDesc`, ``, utools.dbStorage)
 
 onMounted(() => {
   config.value.id = mpId.value || config.value.id

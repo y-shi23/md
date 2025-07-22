@@ -15,31 +15,13 @@ const dialogVisible = computed({
 })
 
 const taskStatus = ref<any>(null)
-const submitting = ref(false)
 
 async function startPost() {
   if (!props.post)
     return
 
   try {
-    window.$syncer?.addTask(
-      {
-        post: {
-          title: props.post.title,
-          content: props.post.content,
-          markdown: props.post.markdown,
-          thumb: props.post.thumb,
-          desc: props.post.desc,
-        },
-        accounts: props.post.accounts.filter(a => a.checked),
-      },
-      (newStatus: any) => {
-        taskStatus.value = newStatus
-      },
-      () => {
-        submitting.value = false
-      },
-    )
+  //
   }
   catch (error) {
     console.error(`发布失败:`, error)

@@ -51,56 +51,56 @@ export const useStore = defineStore(`store`, () => {
   const toggleDark = useToggle(isDark)
 
   // 是否开启 Mac 代码块
-  const isMacCodeBlock = useStorage(`isMacCodeBlock`, defaultStyleConfig.isMacCodeBlock)
+  const isMacCodeBlock = useStorage(`isMacCodeBlock`, defaultStyleConfig.isMacCodeBlock, utools.dbStorage)
   const toggleMacCodeBlock = useToggle(isMacCodeBlock)
 
   // 是否在左侧编辑
-  const isEditOnLeft = useStorage(`isEditOnLeft`, true)
+  const isEditOnLeft = useStorage(`isEditOnLeft`, true, utools.dbStorage)
   const toggleEditOnLeft = useToggle(isEditOnLeft)
 
   // 是否开启微信外链接底部引用
-  const isCiteStatus = useStorage(`isCiteStatus`, defaultStyleConfig.isCiteStatus)
+  const isCiteStatus = useStorage(`isCiteStatus`, defaultStyleConfig.isCiteStatus, utools.dbStorage)
   const toggleCiteStatus = useToggle(isCiteStatus)
 
   // 是否开启 AI 工具箱
-  const showAIToolbox = useStorage(`showAIToolbox`, true)
+  const showAIToolbox = useStorage(`showAIToolbox`, true, utools.dbStorage)
   const toggleAIToolbox = useToggle(showAIToolbox)
 
   // 是否统计字数和阅读时间
-  const isCountStatus = useStorage(`isCountStatus`, defaultStyleConfig.isCountStatus)
+  const isCountStatus = useStorage(`isCountStatus`, defaultStyleConfig.isCountStatus, utools.dbStorage)
   const toggleCountStatus = useToggle(isCountStatus)
 
   // 是否开启段落首行缩进
-  const isUseIndent = useStorage(addPrefix(`use_indent`), false)
+  const isUseIndent = useStorage(addPrefix(`use_indent`), false, utools.dbStorage)
   const toggleUseIndent = useToggle(isUseIndent)
 
   const output = ref(``)
 
   // 文本字体
-  const theme = useStorage<keyof typeof themeMap>(addPrefix(`theme`), defaultStyleConfig.theme)
+  const theme = useStorage<keyof typeof themeMap>(addPrefix(`theme`), defaultStyleConfig.theme, utools.dbStorage)
   // 文本字体
-  const fontFamily = useStorage(`fonts`, defaultStyleConfig.fontFamily)
+  const fontFamily = useStorage(`fonts`, defaultStyleConfig.fontFamily, utools.dbStorage)
   // 文本大小
-  const fontSize = useStorage(`size`, defaultStyleConfig.fontSize)
+  const fontSize = useStorage(`size`, defaultStyleConfig.fontSize, utools.dbStorage)
   // 主色
-  const primaryColor = useStorage(`color`, defaultStyleConfig.primaryColor)
+  const primaryColor = useStorage(`color`, defaultStyleConfig.primaryColor, utools.dbStorage)
   // 代码块主题
-  const codeBlockTheme = useStorage(`codeBlockTheme`, defaultStyleConfig.codeBlockTheme)
+  const codeBlockTheme = useStorage(`codeBlockTheme`, defaultStyleConfig.codeBlockTheme, utools.dbStorage)
   // 图注格式
-  const legend = useStorage(`legend`, defaultStyleConfig.legend)
+  const legend = useStorage(`legend`, defaultStyleConfig.legend, utools.dbStorage)
 
   // 预览宽度
-  const previewWidth = useStorage(`previewWidth`, widthOptions[0].value)
+  const previewWidth = useStorage(`previewWidth`, widthOptions[0].value, utools.dbStorage)
 
   const fontSizeNumber = computed(() => Number(fontSize.value.replace(`px`, ``)))
 
   // 内容编辑器
   const editor = ref<CodeMirror.EditorFromTextArea | null>(null)
   // 预备弃用的旧字段
-  const editorContent = useStorage(`__editor_content`, DEFAULT_CONTENT)
+  const editorContent = useStorage(`__editor_content`, DEFAULT_CONTENT, utools.dbStorage)
 
-  const isOpenRightSlider = useStorage(addPrefix(`is_open_right_slider`), false)
-  const isOpenPostSlider = useStorage(addPrefix(`is_open_post_slider`), false)
+  const isOpenRightSlider = useStorage(addPrefix(`is_open_right_slider`), false, utools.dbStorage)
+  const isOpenPostSlider = useStorage(addPrefix(`is_open_post_slider`), false, utools.dbStorage)
 
   /*******************************
    * 内容列表 posts：默认就带 id
@@ -116,13 +116,13 @@ export const useStore = defineStore(`store`, () => {
       createDatetime: new Date(),
       updateDatetime: new Date(),
     },
-  ])
+  ], utools.dbStorage)
 
   // currentPostId 先存空串
-  const currentPostId = useStorage(addPrefix(`current_post_id`), ``)
+  const currentPostId = useStorage(addPrefix(`current_post_id`), ``, utools.dbStorage)
 
   // 是否为移动端
-  const isMobile = useStorage(`isMobile`, false)
+  const isMobile = useStorage(`isMobile`, false, utools.dbStorage)
 
   function handleResize() {
     isMobile.value = window.innerWidth <= 768
@@ -278,7 +278,7 @@ export const useStore = defineStore(`store`, () => {
    * 自定义 CSS 内容
    * @deprecated 在后续版本中将会移除
    */
-  const cssContent = useStorage(`__css_content`, DEFAULT_CSS_CONTENT)
+  const cssContent = useStorage(`__css_content`, DEFAULT_CSS_CONTENT, utools.dbStorage)
   const cssContentConfig = useStorage(addPrefix(`css_content_config`), {
     active: `方案1`,
     tabs: [
@@ -289,7 +289,7 @@ export const useStore = defineStore(`store`, () => {
         content: cssContent.value || DEFAULT_CSS_CONTENT,
       },
     ],
-  })
+  }, utools.dbStorage)
   onMounted(() => {
     // 清空过往历史记录
     cssContent.value = ``
@@ -751,7 +751,7 @@ export const useStore = defineStore(`store`, () => {
 
 export const useDisplayStore = defineStore(`display`, () => {
   // 是否展示 CSS 编辑器
-  const isShowCssEditor = useStorage(`isShowCssEditor`, false)
+  const isShowCssEditor = useStorage(`isShowCssEditor`, false, utools.dbStorage)
   const toggleShowCssEditor = useToggle(isShowCssEditor)
 
   // 是否展示插入表格对话框

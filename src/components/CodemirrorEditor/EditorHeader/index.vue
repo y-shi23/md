@@ -86,7 +86,7 @@ const formatItems = [
   },
 ] as const
 
-const copyMode = useStorage(addPrefix(`copyMode`), `txt`)
+const copyMode = useStorage(addPrefix(`copyMode`), `txt`, utools.dbStorage)
 
 const { copy: copyContent } = useClipboard({
   legacy: true,

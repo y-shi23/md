@@ -17,12 +17,12 @@ const githubSchema = toTypedSchema(yup.object({
   accessToken: yup.string().required(`GitHub Token 不能为空`),
 }))
 
-const githubConfig = ref(localStorage.getItem(`githubConfig`)
-  ? JSON.parse(localStorage.getItem(`githubConfig`)!)
+const githubConfig = ref(utools.dbStorage.getItem(`githubConfig`)
+  ? JSON.parse(utools.dbStorage.getItem(`githubConfig`)!)
   : { repo: ``, branch: ``, accessToken: `` })
 
 function githubSubmit(formValues: any) {
-  localStorage.setItem(`githubConfig`, JSON.stringify(formValues))
+  utools.dbStorage.setItem(`githubConfig`, JSON.stringify(formValues))
   githubConfig.value = formValues
   toast.success(`保存成功`)
 }
@@ -38,8 +38,8 @@ const aliOSSSchema = toTypedSchema(yup.object({
   path: yup.string().optional(),
 }))
 
-const aliOSSConfig = ref(localStorage.getItem(`aliOSSConfig`)
-  ? JSON.parse(localStorage.getItem(`aliOSSConfig`)!)
+const aliOSSConfig = ref(utools.dbStorage.getItem(`aliOSSConfig`)
+  ? JSON.parse(utools.dbStorage.getItem(`aliOSSConfig`)!)
   : {
       accessKeyId: ``,
       accessKeySecret: ``,
@@ -51,7 +51,7 @@ const aliOSSConfig = ref(localStorage.getItem(`aliOSSConfig`)
     })
 
 function aliOSSSubmit(formValues: any) {
-  localStorage.setItem(`aliOSSConfig`, JSON.stringify(formValues))
+  utools.dbStorage.setItem(`aliOSSConfig`, JSON.stringify(formValues))
   aliOSSConfig.value = formValues
   toast.success(`保存成功`)
 }
@@ -66,8 +66,8 @@ const txCOSSchema = toTypedSchema(yup.object({
   path: yup.string().optional(),
 }))
 
-const txCOSConfig = ref(localStorage.getItem(`txCOSConfig`)
-  ? JSON.parse(localStorage.getItem(`txCOSConfig`)!)
+const txCOSConfig = ref(utools.dbStorage.getItem(`txCOSConfig`)
+  ? JSON.parse(utools.dbStorage.getItem(`txCOSConfig`)!)
   : {
       secretId: ``,
       secretKey: ``,
@@ -78,7 +78,7 @@ const txCOSConfig = ref(localStorage.getItem(`txCOSConfig`)
     })
 
 function txCOSSubmit(formValues: any) {
-  localStorage.setItem(`txCOSConfig`, JSON.stringify(formValues))
+  utools.dbStorage.setItem(`txCOSConfig`, JSON.stringify(formValues))
   txCOSConfig.value = formValues
   toast.success(`保存成功`)
 }
@@ -93,8 +93,8 @@ const qiniuSchema = toTypedSchema(yup.object({
   path: yup.string().optional(),
 }))
 
-const qiniuConfig = ref(localStorage.getItem(`qiniuConfig`)
-  ? JSON.parse(localStorage.getItem(`qiniuConfig`)!)
+const qiniuConfig = ref(utools.dbStorage.getItem(`qiniuConfig`)
+  ? JSON.parse(utools.dbStorage.getItem(`qiniuConfig`)!)
   : {
       accessKey: ``,
       secretKey: ``,
@@ -105,7 +105,7 @@ const qiniuConfig = ref(localStorage.getItem(`qiniuConfig`)
     })
 
 function qiniuSubmit(formValues: any) {
-  localStorage.setItem(`qiniuConfig`, JSON.stringify(formValues))
+  utools.dbStorage.setItem(`qiniuConfig`, JSON.stringify(formValues))
   qiniuConfig.value = formValues
   toast.success(`保存成功`)
 }
@@ -120,8 +120,8 @@ const minioOSSSchema = toTypedSchema(yup.object({
   secretKey: yup.string().required(`SecretKey 不能为空`),
 }))
 
-const minioOSSConfig = ref(localStorage.getItem(`minioConfig`)
-  ? JSON.parse(localStorage.getItem(`minioConfig`)!)
+const minioOSSConfig = ref(utools.dbStorage.getItem(`minioConfig`)
+  ? JSON.parse(utools.dbStorage.getItem(`minioConfig`)!)
   : {
       endpoint: ``,
       port: ``,
@@ -132,7 +132,7 @@ const minioOSSConfig = ref(localStorage.getItem(`minioConfig`)
     })
 
 function minioOSSSubmit(formValues: any) {
-  localStorage.setItem(`minioConfig`, JSON.stringify(formValues))
+  utools.dbStorage.setItem(`minioConfig`, JSON.stringify(formValues))
   minioOSSConfig.value = formValues
   toast.success(`保存成功`)
 }
@@ -145,12 +145,12 @@ const telegramSchema = toTypedSchema(
   }),
 )
 const telegramConfig = ref(
-  localStorage.getItem(`telegramConfig`)
-    ? JSON.parse(localStorage.getItem(`telegramConfig`)!)
+  utools.dbStorage.getItem(`telegramConfig`)
+    ? JSON.parse(utools.dbStorage.getItem(`telegramConfig`)!)
     : { token: ``, chatId: `` },
 )
 function telegramSubmit(values: any) {
-  localStorage.setItem(`telegramConfig`, JSON.stringify(values))
+  utools.dbStorage.setItem(`telegramConfig`, JSON.stringify(values))
   telegramConfig.value = values
   toast.success(`保存成功`)
 }
@@ -186,8 +186,8 @@ const mpSchema = computed(() =>
   })),
 )
 
-const mpConfig = ref(localStorage.getItem(`mpConfig`)
-  ? JSON.parse(localStorage.getItem(`mpConfig`)!)
+const mpConfig = ref(utools.dbStorage.getItem(`mpConfig`)
+  ? JSON.parse(utools.dbStorage.getItem(`mpConfig`)!)
   : {
       proxyOrigin: ``,
       appID: ``,
@@ -195,7 +195,7 @@ const mpConfig = ref(localStorage.getItem(`mpConfig`)
     })
 
 function mpSubmit(formValues: any) {
-  localStorage.setItem(`mpConfig`, JSON.stringify(formValues))
+  utools.dbStorage.setItem(`mpConfig`, JSON.stringify(formValues))
   mpConfig.value = formValues
   toast.success(`保存成功`)
 }
@@ -210,8 +210,8 @@ const r2Schema = toTypedSchema(yup.object({
   path: yup.string().optional(),
 }))
 
-const r2Config = ref(localStorage.getItem(`r2Config`)
-  ? JSON.parse(localStorage.getItem(`r2Config`)!)
+const r2Config = ref(utools.dbStorage.getItem(`r2Config`)
+  ? JSON.parse(utools.dbStorage.getItem(`r2Config`)!)
   : {
       accountId: ``,
       accessKey: ``,
@@ -222,7 +222,7 @@ const r2Config = ref(localStorage.getItem(`r2Config`)
     })
 
 function r2Submit(formValues: any) {
-  localStorage.setItem(`r2Config`, JSON.stringify(formValues))
+  utools.dbStorage.setItem(`r2Config`, JSON.stringify(formValues))
   r2Config.value = formValues
   toast.success(`保存成功`)
 }
@@ -238,8 +238,8 @@ const upyunSchema = computed(() => toTypedSchema(
   }),
 ))
 
-const upyunConfig = ref(localStorage.getItem(`upyunConfig`)
-  ? JSON.parse(localStorage.getItem(`upyunConfig`)!)
+const upyunConfig = ref(utools.dbStorage.getItem(`upyunConfig`)
+  ? JSON.parse(utools.dbStorage.getItem(`upyunConfig`)!)
   : {
       bucket: ``,
       operator: ``,
@@ -249,7 +249,7 @@ const upyunConfig = ref(localStorage.getItem(`upyunConfig`)
     })
 
 function upyunSubmit(formValues: any) {
-  localStorage.setItem(`upyunConfig`, JSON.stringify(formValues))
+  utools.dbStorage.setItem(`upyunConfig`, JSON.stringify(formValues))
   upyunConfig.value = formValues
   toast.success(`保存成功`)
 }
@@ -271,8 +271,8 @@ const cloudinarySchema = toTypedSchema(
 )
 
 const cloudinaryConfig = ref(
-  localStorage.getItem(`cloudinaryConfig`)
-    ? JSON.parse(localStorage.getItem(`cloudinaryConfig`)!)
+  utools.dbStorage.getItem(`cloudinaryConfig`)
+    ? JSON.parse(utools.dbStorage.getItem(`cloudinaryConfig`)!)
     : {
         cloudName: ``,
         apiKey: ``,
@@ -284,7 +284,7 @@ const cloudinaryConfig = ref(
 )
 
 function cloudinarySubmit(formValues: any) {
-  localStorage.setItem(`cloudinaryConfig`, JSON.stringify(formValues))
+  utools.dbStorage.setItem(`cloudinaryConfig`, JSON.stringify(formValues))
   cloudinaryConfig.value = formValues
   toast.success(`保存成功`)
 }
@@ -343,13 +343,13 @@ const imgHost = ref(`default`)
 const activeName = ref(`upload`)
 
 onBeforeMount(() => {
-  if (localStorage.getItem(`imgHost`)) {
-    imgHost.value = localStorage.getItem(`imgHost`)!
+  if (utools.dbStorage.getItem(`imgHost`)) {
+    imgHost.value = utools.dbStorage.getItem(`imgHost`)!
   }
 })
 
 function changeImgHost() {
-  localStorage.setItem(`imgHost`, imgHost.value)
+  utools.dbStorage.setItem(`imgHost`, imgHost.value)
   toast.success(`图床已切换`)
 }
 
@@ -361,11 +361,11 @@ function beforeImageUpload(file: File) {
     return false
   }
   // check image host
-  let imgHost = localStorage.getItem(`imgHost`)
+  let imgHost = utools.dbStorage.getItem(`imgHost`)
   imgHost = imgHost || `default`
-  localStorage.setItem(`imgHost`, imgHost)
+  utools.dbStorage.setItem(`imgHost`, imgHost)
 
-  const config = localStorage.getItem(`${imgHost}Config`)
+  const config = utools.dbStorage.getItem(`${imgHost}Config`)
   const isValidHost = imgHost === `default` || config
   if (!isValidHost) {
     toast.error(`请先配置 ${imgHost} 图床参数`)

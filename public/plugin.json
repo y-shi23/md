@@ -1,0 +1,14 @@
+{
+  "main": "index.html",
+  "logo": "logo.png",
+  "features": [
+    {
+      "code": "md",
+      "explain": "微信Markdown编辑器",
+      "cmds": ["wechat", "wx", "markdown", "md"]
+    }
+  ],
+  "pluginSetting": {
+    "single": true
+  }
+}
